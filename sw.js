@@ -1,6 +1,5 @@
 // sw.js - Service Worker for PWA
-const CACHE_NAME = "chery-calc-v150";
-const VEHICLE_DATA_ORIGIN = "https://chery-car-data.data-quotation.workers.dev";
+const CACHE_NAME = "chery-calc-v151";
 const APP_SHELL_URLS = [
   "/style.css",
   "/script.js",
@@ -12,17 +11,6 @@ function freshRequest(request) {
   return new Request(request, {
     cache: "reload",
     redirect: "error",
-  });
-}
-
-function noStoreJson(body, status = 503) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-store",
-      "Access-Control-Allow-Origin": "*",
-    },
   });
 }
 
@@ -43,17 +31,6 @@ async function fetchAndCacheAppShell(request) {
 
     if (cached) return cached;
     throw error;
-  }
-}
-
-async function fetchVehicleData(request) {
-  try {
-    return await fetch(new Request(request, { cache: "no-store" }));
-  } catch (error) {
-    return noStoreJson({
-      error: "live_vehicle_data_unavailable",
-      message: "Live Chery vehicle data is unavailable. Please try again online.",
-    });
   }
 }
 
@@ -79,11 +56,6 @@ self.addEventListener("fetch", (event) => {
   if (request.mode === "navigate") return;
 
   const url = new URL(request.url);
-
-  if (url.origin === VEHICLE_DATA_ORIGIN) {
-    event.respondWith(fetchVehicleData(request));
-    return;
-  }
 
   if (url.origin !== self.location.origin) return;
 
