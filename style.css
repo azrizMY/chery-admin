@@ -4184,10 +4184,10 @@ a.eligible-variant-link:active {
 
 @media (min-width: 981px) {
   #calculatorPage .quote-summary-card .vehicle-image-frame {
-    grid-column: 2;
-    grid-row: 1 / 4;
-    align-self: stretch;
-    justify-self: stretch;
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 63%;
+    height: 100%;
     padding: clamp(4px, 0.8dvh, 8px);
   }
 }
