@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Chery Salary Eligibility</title>
+    <meta name="description" content="Chery salary eligibility guide for estimating suitable models by net monthly salary.">
+    <meta property="og:title" content="Chery Salary Eligibility">
+    <meta property="og:description" content="Check estimated Chery model eligibility using salary, loan mode, and repayment assumptions.">
+    <meta property="og:image" content="/images/logo.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Chery Salary Eligibility">
+    <meta name="twitter:description" content="Check estimated Chery model eligibility using salary, loan mode, and repayment assumptions.">
+    <meta name="twitter:image" content="/images/logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#d51f3c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Chery Calc">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="apple-touch-icon" href="/images/logo.png">
+    <link rel="stylesheet" href="style.css?v=ui-v11">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="app-shell">
+        <aside class="page-navigation" aria-label="Page navigation">
+            <div class="mobile-page-header">
+                <button type="button" class="mobile-customize-button" data-drawer-open="eligibilitySettingsPanel"
+                    aria-controls="eligibilitySettingsPanel" aria-expanded="false" aria-label="Customize eligibility setup">
+                    <span class="mobile-menu-icon" aria-hidden="true"></span>
+                </button>
+                <img src="/images/chery-horizontal-logo.png" alt="Chery">
+                <details class="mobile-page-switcher">
+                    <summary>
+                        <span>02</span>
+                        Eligibility
+                    </summary>
+                    <div class="mobile-page-switcher-menu">
+                        <a href="index.html"><span>01</span> Calculator</a>
+                        <a href="eligibility.html" aria-current="page"><span>02</span> Eligibility</a>
+                        <a href="contact.html"><span>03</span> Contact</a>
+                    </div>
+                </details>
+            </div>
+            <a class="page-navigation-link" href="index.html">
+                <span>01</span>
+                Calculator
+            </a>
+            <a class="page-navigation-link" href="eligibility.html" aria-current="page">
+                <span>02</span>
+                Eligibility
+            </a>
+            <a class="page-navigation-link" href="contact.html">
+                <span>03</span>
+                Contact
+            </a>
+        </aside>
+
+        <main class="page-content-area">
+            <section class="page-content eligibility-page">
+                <div class="eligibility-preview-panel">
+                    <div class="summary-card-shell eligibility-summary-card">
+                        <div class="eligibility-header">
+                            <img class="salary-logo" src="/images/chery-vertical-logo.png" alt="Chery Logo">
+                            <div>
+                                <div class="eligibility-kicker">CHERY ELIGIBILITY GUIDE</div>
+                                <h1>KERETA SESUAI BERDASARKAN GAJI</h1>
+                                <p>Nak semak kelayakan? Sebutkan anggaran gaji bersih anda.</p>
+                            </div>
+                            <div class="eligibility-road-animation" aria-hidden="true">
+                                <svg class="eligibility-moving-car" viewBox="0 0 96 42">
+                                    <path class="eligibility-car-body"
+                                        d="M3 28c0-3 2-5 5-6l10-3 8-10c1-2 3-3 6-3h29c4 0 7 1 9 4l10 11 8 1c4 1 6 3 6 7v4H3Z" />
+                                    <circle class="eligibility-car-wheel" cx="24" cy="33" r="7" />
+                                    <circle class="eligibility-car-wheel" cx="76" cy="33" r="7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <label class="salary-input-card" for="salaryInput">
+                            <span class="salary-input-label">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M4 7.5H18.5C20.1 7.5 21 8.4 21 10V18C21 19.6 20.1 20.5 18.5 20.5H4C2.9 20.5 2 19.6 2 18.5V7.5C2 6.4 2.9 5.5 4 5.5H16.5" />
+                                    <path d="M4.5 5.5L16 3.2V7.5" />
+                                    <path d="M17.5 13.8H21" />
+                                    <circle cx="17.3" cy="13.8" r="1.15" fill="currentColor" stroke="none" />
+                                </svg>
+                                <span class="salary-input-label-text">
+                                    <b>ANGGARAN<br>GAJI BERSIH</b>
+                                    <em>(SEBULAN)</em>
+                                </span>
+                            </span>
+                            <span class="salary-input-currency">RM</span>
+                            <span class="salary-input-field">
+                                <span class="salary-input-divider"></span>
+                                <input id="salaryInput" type="number" min="0" step="100" value="3000"
+                                    inputmode="numeric">
+                            </span>
+                        </label>
+
+                        <div class="eligibility-disclaimer" aria-label="Eligibility status guide">
+                            <span class="eligibility-disclaimer-item high">
+                                <b>Layak</b>
+                                Ansuran dalam had 35% daripada gaji.
+                            </span>
+                            <span class="eligibility-disclaimer-item potential">
+                                <b>Potensi Layak</b>
+                                Gaji cukup syarat minimum, boleh cuba mohon.
+                            </span>
+                            <span class="eligibility-disclaimer-item ineligible">
+                                <b>Belum Layak</b>
+                                Gaji belum mencapai syarat minimum.
+                            </span>
+                        </div>
+
+                        <div class="eligibility-table">
+                            <div class="eligibility-table-header">
+                                <span>Model</span>
+                                <span>Status</span>
+                                <span>Anggaran Kelayakan</span>
+                            </div>
+                            <div id="eligibilityRows" class="eligibility-table-body"></div>
+                        </div>
+
+                        <div class="eligibility-disclaimer eligibility-final-disclaimer" aria-label="Eligibility disclaimer">
+                            <span class="eligibility-disclaimer-item final-note">
+                                * Anggaran sahaja. Kelulusan akhir tertakluk kepada penilaian pihak bank.
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="button" class="drawer-open-button" data-drawer-open="eligibilitySettingsPanel"
+                    aria-controls="eligibilitySettingsPanel" aria-expanded="false" aria-label="Customize quote">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 6h9" />
+                        <path d="M17 6h3" />
+                        <path d="M15 4v4" />
+                        <path d="M4 12h3" />
+                        <path d="M11 12h9" />
+                        <path d="M9 10v4" />
+                        <path d="M4 18h11" />
+                        <path d="M19 18h1" />
+                        <path d="M17 16v4" />
+                    </svg>
+                    <span class="drawer-open-label">Customize Eligibility</span>
+                </button>
+                <button type="button" class="drawer-backdrop" data-drawer-close aria-label="Close controls"></button>
+
+                <div class="settings-panel eligibility-settings-panel" id="eligibilitySettingsPanel" data-control-drawer>
+                    <div class="control-header">
+                        <div class="control-title">CUSTOMIZE ELIGIBILITY</div>
+                        <button type="button" class="drawer-close-button" data-drawer-close aria-label="Close controls">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="control-card">
+                        <div class="control-card-title">Eligibility Setup</div>
+                        <div class="control-group">
+                            <label>Net Salary (RM)</label>
+                            <input id="salarySettingsInput" type="number" min="0" step="100" value="3000">
+                        </div>
+                        <div class="control-group">
+                            <label>Loan Mode</label>
+                            <div class="salary-loan-options">
+                                <label>
+                                    <input type="radio" name="salaryLoanMode" value="ten-percent" checked>
+                                    10% DP
+                                </label>
+                                <label>
+                                    <input type="radio" name="salaryLoanMode" value="full-loan">
+                                    Full Loan
+                                </label>
+                            </div>
+                        </div>
+                        <div class="eligibility-calculation-note">
+                            Variants are estimated using a 9-year monthly payment, the selected loan mode, and a fixed
+                            35% salary limit.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

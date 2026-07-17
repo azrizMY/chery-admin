@@ -1,0 +1,18 @@
+{
+    "name": "Chery Quotation Calculator",
+    "short_name": "Chery Calc",
+    "description": "Chery Car Loan Calculator for Sales Consultant",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#d51f3c",
+    "background_color": "#050505",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/images/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
