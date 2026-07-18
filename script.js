@@ -27,6 +27,7 @@ const MAX_DESKTOP_UI_SCALE = 2;
 const EIR_EQUIVALENT_FACTOR = 1.86;
 const AVAILABLE_MODEL_YEARS = [2025, 2026];
 const VEHICLE_DATA_URL = "/chery-car-data.json";
+const VEHICLE_DATA_URL = "https://chery-shared-data.data-quotation.workers.dev/chery-car-data.json";
 const ADVISOR_SETTINGS_STORAGE_KEY = "chery-advisor-settings";
 const CONSULTANT_QUERY_PARAM = "consultant";
 const APP_PAGE_ROUTES = new Set(["index", "eligibility", "contact"]);
