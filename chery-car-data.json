@@ -292,12 +292,87 @@
       "qrImage": "/images/consultants/alif-qr.png",
       "socials": {
         "instagram": null,
-        "tiktok": "@chery.kb",
-        "facebook": "https://www.facebook.com/profile.php?id=61554217712184",
+        "tiktok": null,
+        "facebook": null,
         "threads": null
       },
       "active": true,
       "sortOrder": 2
+    },
+    {
+      "id": "wan",
+      "name": "WAN",
+      "phone": "01131298938",
+      "photo": "/images/consultants/wan.jpeg",
+      "qrImage": "/images/consultants/wan-qr.png",
+      "socials": {
+        "instagram": null,
+        "tiktok": null,
+        "facebook": null,
+        "threads": null
+      },
+      "active": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "izdihar",
+      "name": "IZDIHAR",
+      "phone": "0179445686",
+      "photo": "/images/consultants/izdihar.jpeg",
+      "qrImage": "/images/consultants/izdihar-qr.png",
+      "socials": {
+        "instagram": null,
+        "tiktok": null,
+        "facebook": null,
+        "threads": null
+      },
+      "active": true,
+      "sortOrder": 4
+    },
+    {
+      "id": "ashikin",
+      "name": "ASAHIKIN",
+      "phone": "0145186745",
+      "photo": "/images/consultants/ashikin.jpeg",
+      "qrImage": "/images/consultants/ashikin-qr.png",
+      "socials": {
+        "instagram": null,
+        "tiktok": null,
+        "facebook": null,
+        "threads": null
+      },
+      "active": true,
+      "sortOrder": 5
+    },
+    {
+      "id": "mazlina",
+      "name": "MAZLINA",
+      "phone": "01111381518",
+      "photo": "/images/consultants/mazlina.jpeg",
+      "qrImage": "/images/consultants/mazlina-qr.png",
+      "socials": {
+        "instagram": null,
+        "tiktok": null,
+        "facebook": null,
+        "threads": null
+      },
+      "active": true,
+      "sortOrder": 6
+    },
+    {
+      "id": "izati",
+      "name": "IZATI",
+      "phone": "01114178512",
+      "photo": "/images/consultants/izati.jpeg",
+      "qrImage": "/images/consultants/izati-qr.png",
+      "socials": {
+        "instagram": null,
+        "tiktok": null,
+        "facebook": null,
+        "threads": null
+      },
+      "active": true,
+      "sortOrder": 7
     }
   ]
 }
