@@ -1,5 +1,5 @@
 // sw.js - Service Worker for PWA
-const CACHE_NAME = "chery-calc-v151";
+const CACHE_NAME = "chery-calc-v159";
 const APP_SHELL_URLS = [
   "/style.css",
   "/script.js",

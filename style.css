@@ -2701,16 +2701,6 @@ a.eligible-variant-link:active {
     height: auto;
   }
 
-  .vehicle-selector {
-    --car-option-height: 38px;
-    grid-template-columns: 1fr;
-    gap: 9px;
-  }
-
-  .vehicle-option-row {
-    grid-template-columns: 98px minmax(0, 1fr);
-  }
-
   .eligibility-settings-panel .control-card {
     grid-column: 1 / -1;
   }
@@ -2766,326 +2756,6 @@ a.eligible-variant-link:active {
   }
 }
 
-@media (min-width: 981px) and (max-width: 1366px) and (min-height: 900px),
-       (min-width: 981px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) {
-  .contact-services {
-    display: none;
-  }
-
-  body {
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  .app-shell {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
-  }
-
-  .page-navigation {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    flex-direction: row;
-    padding: 10px;
-    width: 100%;
-    height: auto;
-    border-right: 0;
-    border-bottom: 2px solid var(--border);
-    transform: none;
-  }
-
-  .page-navigation-link {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 3px;
-    min-height: 48px;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 10px;
-    text-align: center;
-  }
-
-  .page-navigation-link span {
-    justify-self: auto;
-    line-height: 1;
-  }
-
-  .page-content-area,
-  .page-content {
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .calculator-layout {
-    height: auto;
-    overflow: visible;
-  }
-
-  .quote-preview-panel {
-    min-width: 0;
-    height: auto;
-    padding: 0;
-    justify-content: center;
-    overflow: visible;
-  }
-
-  .settings-panel {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: 12px;
-    align-items: start;
-    margin-inline: 0;
-  }
-
-  .calculator-settings-panel,
-  .advisor-settings-panel {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .eligibility-settings-panel {
-    border-top: 0;
-  }
-
-  .control-header {
-    grid-column: 1 / -1;
-    margin-bottom: 2px;
-  }
-
-
-  .control-card:has(.vehicle-selector),
-  .tenure-selection-card,
-  .eligibility-settings-panel .control-card {
-    grid-column: 1 / -1;
-  }
-
-  .calculator-settings-panel>.control-card:has(.vehicle-selector) {
-    grid-column: 1 / -1;
-  }
-
-  .calculator-settings-panel>.control-card:has(#rebateInput) {
-    grid-column: 1;
-  }
-
-  .calculator-settings-panel>.control-card:has(#interestRateInput) {
-    grid-column: 2;
-  }
-
-  .calculator-settings-panel>.tenure-selection-card {
-    grid-column: 3;
-    grid-row: 3;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .calculator-settings-panel>.tenure-selection-card .control-group {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .vehicle-selector {
-    --car-option-height: 34px;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-    gap: 10px 14px;
-  }
-
-  .vehicle-option-row {
-    grid-template-columns: 74px minmax(0, 1fr);
-  }
-
-  .summary-card-shell,
-  .quote-summary-card {
-    height: auto;
-    min-height: 0;
-    max-height: none;
-  }
-
-  .summary-card-shell {
-    min-height: 0;
-  }
-
-  #calculatorPage .summary-card-shell.quote-summary-card,
-  .eligibility-page .summary-card-shell.eligibility-summary-card {
-    border: 0;
-    box-shadow: none;
-  }
-
-  .eligibility-page {
-    grid-template-columns: 1fr;
-    height: auto;
-  }
-
-  .eligibility-preview-panel {
-    justify-content: center;
-    min-width: 0;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    padding: 0;
-    background: transparent;
-    overflow: visible;
-  }
-
-  .eligibility-page .eligibility-preview-panel {
-    align-items: stretch;
-    justify-content: stretch;
-  }
-
-  .eligibility-page .eligibility-summary-card {
-    --summary-card-shell-design-width: 100%;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .quote-summary-card {
-    --summary-card-shell-design-width: 100%;
-    --vehicle-image-y: clamp(52px, 5vw, 76px);
-    --vehicle-image-scale: 0.78;
-    display: grid;
-    grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
-    gap: 10px 12px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .quote-summary-card .vehicle-summary {
-    grid-template-rows: clamp(238px, 28vw, 318px) auto;
-    align-content: end;
-    overflow: hidden;
-    height: auto;
-  }
-
-  .quote-summary-card .vehicle-advisor-header {
-    grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 1fr) minmax(320px, 34vw);
-    align-items: stretch;
-    margin-bottom: 0;
-  }
-
-  .quote-summary-card .quote-advisor-panel {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    align-content: center;
-    gap: clamp(16px, 2vw, 24px);
-  }
-
-  .quote-summary-card .quote-advisor-panel .advisor-qr-section {
-    gap: clamp(14px, 1.7vw, 20px);
-    margin-top: 0;
-  }
-
-  .quote-summary-card .quote-advisor-panel .chery-logo {
-    height: clamp(64px, 7.6vw, 88px);
-  }
-
-  .quote-summary-card .quote-advisor-panel .advisor-qr-code {
-    width: clamp(84px, 8.6vw, 100px);
-    height: clamp(84px, 8.6vw, 100px);
-  }
-
-  .quote-summary-card .vehicle-name-row {
-    position: relative;
-    z-index: 2;
-    margin-top: clamp(18px, 2.2vw, 30px);
-  }
-
-  .quote-summary-card .on-road-price-summary {
-    grid-column: 1;
-    margin-top: 0;
-    gap: clamp(16px, 1.8cqw, 24px);
-    min-height: clamp(128px, 17cqw, 178px);
-    padding: clamp(22px, 2.6cqw, 32px);
-    border-left-width: clamp(8px, 0.95cqw, 12px);
-  }
-
-  .quote-summary-card .financing-summary {
-    grid-column: 2;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 0;
-  }
-
-  .quote-summary-card .on-road-price-label,
-  .quote-summary-card .financing-summary-item span,
-  .quote-summary-card .repayment-header {
-    font-size: clamp(1rem, 1.45cqw, 1.22rem);
-  }
-
-  .quote-summary-card .on-road-price-value {
-    font-size: clamp(3.2rem, 5.35cqw, 4.55rem);
-    white-space: nowrap;
-  }
-
-  .quote-summary-card .financing-summary-item {
-    min-height: clamp(96px, 11.5cqw, 128px);
-    gap: clamp(16px, 2cqw, 24px);
-    padding: clamp(20px, 2.4cqw, 30px);
-  }
-
-  .quote-summary-card .financing-summary-item strong {
-    font-size: clamp(1.45rem, 2.25cqw, 2rem);
-  }
-
-  .quote-summary-card .metric-icon {
-    --outlined-icon-size: clamp(56px, 6.1cqw, 76px);
-  }
-
-  .quote-summary-card .on-road-price-summary .metric-icon-large {
-    --outlined-icon-size: clamp(68px, 7cqw, 88px);
-  }
-
-  .quote-summary-card .price-breakdown,
-  .quote-summary-card .repayment-table {
-    grid-column: 1 / -1;
-  }
-
-  .quote-summary-card .price-breakdown {
-    padding: clamp(18px, 2.4cqw, 30px) clamp(24px, 3cqw, 38px);
-  }
-
-  .quote-summary-card .price-breakdown .price-breakdown-row {
-    padding: clamp(14px, 2cqw, 22px) 0;
-  }
-
-  .quote-summary-card .price-breakdown .price-breakdown-label {
-    gap: clamp(16px, 2.2cqw, 26px);
-    font-size: clamp(1.18rem, 1.85cqw, 1.55rem);
-  }
-
-  .quote-summary-card .price-breakdown-icon {
-    --price-breakdown-icon-size: clamp(34px, 4.2cqw, 48px);
-  }
-
-  .quote-summary-card .price-breakdown-value,
-  .quote-summary-card .special-offer-item {
-    font-size: clamp(1.35rem, 2.05cqw, 1.85rem);
-  }
-
-  .quote-summary-card .repayment-header {
-    padding: clamp(10px, 1.35cqw, 16px) clamp(24px, 3cqw, 38px);
-  }
-
-  .quote-summary-card .repayment-row {
-    min-height: clamp(58px, 7.4cqw, 82px);
-    padding: clamp(10px, 1.35cqw, 16px) clamp(24px, 3cqw, 38px);
-  }
-
-  .quote-summary-card .repayment-row.selected-repayment-row {
-    border-left-width: clamp(5px, 0.7cqw, 8px);
-    padding-left: clamp(19px, 2.3cqw, 30px);
-  }
-
-  .quote-summary-card .tenure-value,
-  .quote-summary-card .monthly-payment-value {
-    font-size: clamp(1.45rem, 2.3cqw, 2rem);
-  }
-}
 
 @media (min-width: 761px) and (max-width: 980px) {
   .quote-summary-card {
@@ -4942,28 +4612,6 @@ body .eligibility-page .summary-card-shell.eligibility-summary-card,
   }
 }
 
-/* Landscape touch tablets keep their independent two-column composition. */
-@media (min-width: 981px) and (max-width: 1366px) and (min-height: 900px),
-       (min-width: 981px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) {
-  #calculatorPage .quote-summary-card {
-    container-type: inline-size;
-  }
-
-  #calculatorPage .quote-summary-card .vehicle-summary {
-    grid-template-rows: 27cqw auto;
-    align-self: start;
-    height: auto;
-    padding-inline: 3.2cqw;
-    gap: 0.8cqw;
-  }
-
-  #calculatorPage .quote-summary-card .vehicle-image {
-    --vehicle-image-y: 5cqw;
-    --vehicle-image-scale: 0.78;
-    --vehicle-model-image-offset-y: 0px;
-    transform: translateY(var(--vehicle-image-y)) scale(var(--vehicle-image-scale));
-  }
-}
 
 @media (max-width: 980px) {
   body.control-drawer-open {
@@ -5112,9 +4760,7 @@ body .eligibility-page .summary-card-shell.eligibility-summary-card,
 }
 
 /* Compact devices: keep model names readable while variants wrap as compact pills. */
-@media (max-width: 980px),
-       (min-width: 981px) and (max-width: 1366px) and (min-height: 900px),
-       (min-width: 981px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) {
+@media (max-width: 980px) {
   .vehicle-selector {
     --car-option-height: 38px;
     display: grid;
@@ -5192,155 +4838,6 @@ body .eligibility-page .summary-card-shell.eligibility-summary-card,
   }
 }
 
-@media (min-width: 981px) and (max-width: 1366px) and (min-height: 900px),
-       (min-width: 981px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) {
-  body.control-drawer-open {
-    overflow: hidden;
-  }
-
-  .calculator-layout,
-  .eligibility-page {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .quote-preview-panel,
-  .eligibility-preview-panel {
-    order: 2;
-  }
-
-  .drawer-open-button {
-    order: 1;
-    position: sticky;
-    top: 70px;
-    z-index: 35;
-    display: flex;
-    width: 100%;
-    min-width: 0;
-    height: 48px;
-    gap: 8px;
-    padding: 0 16px;
-    border-radius: 0;
-    border-right: 0;
-    border-left: 0;
-    box-shadow: none;
-    animation: none;
-    overflow: hidden;
-    transform: translateY(0);
-    transition: height 0.2s ease, transform 0.2s ease, opacity 0.16s ease, border-color 0.16s ease;
-  }
-
-  body.control-drawer-trigger-hidden:not(.control-drawer-open) .drawer-open-button {
-    height: 0;
-    border-color: transparent;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-100%);
-  }
-
-  body.control-drawer-discovered .drawer-open-button {
-    padding-inline: 16px;
-    animation: none;
-  }
-
-  body.control-drawer-discovered .drawer-open-label {
-    max-width: none;
-    opacity: 1;
-  }
-
-  .drawer-close-button {
-    display: flex;
-    width: 36px;
-    height: 36px;
-    flex: 0 0 auto;
-    background: #171717;
-    border-color: var(--border);
-    box-shadow: none;
-  }
-
-  .drawer-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-    display: block;
-    background: rgba(2, 2, 2, 0.68);
-    border: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.18s ease;
-  }
-
-  body.control-drawer-open .drawer-backdrop {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .settings-panel {
-    position: fixed;
-    top: 0;
-    right: auto;
-    bottom: 0;
-    left: 0;
-    z-index: 90;
-    display: block;
-    width: min(88vw, 430px);
-    min-width: 0;
-    max-width: none;
-    height: 100dvh;
-    max-height: none;
-    padding: 16px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    background: var(--settings-panel-background);
-    border-top: 0;
-    border-right: 1px solid var(--border);
-    border-left: 0;
-    box-shadow: 18px 0 42px rgba(0, 0, 0, 0.48);
-    transform: translateX(-104%);
-    transition: transform 0.22s ease;
-  }
-
-  .settings-panel.drawer-open {
-    transform: translateX(0);
-  }
-
-  .control-header {
-    position: sticky;
-    top: -16px;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: -16px -16px 12px;
-    padding: 14px 16px;
-    background: var(--settings-panel-surface);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .control-card,
-  .eligibility-settings-panel .control-card {
-    display: block;
-    height: auto;
-    margin-bottom: 12px;
-    padding: 12px;
-  }
-
-  .eligibility-settings-panel .control-card-title,
-  .eligibility-settings-panel .eligibility-calculation-note {
-    grid-column: auto;
-  }
-
-  .eligibility-settings-panel .control-group {
-    margin-bottom: 12px;
-  }
-
-  .eligibility-settings-panel .control-group:last-child {
-    margin-bottom: 0;
-  }
-
-}
 
 @media (prefers-reduced-motion: reduce) {
   .drawer-open-button {
@@ -6382,9 +5879,7 @@ body .eligibility-page .summary-card-shell.eligibility-summary-card,
   color: var(--text-main);
 }
 
-@media (max-width: 980px),
-       (min-width: 981px) and (max-width: 1366px) and (min-height: 900px),
-       (min-width: 981px) and (max-width: 1366px) and (orientation: landscape) and (hover: none) {
+@media (max-width: 980px) {
   #calculatorPage .price-breakdown {
     display: grid;
   }
@@ -6595,6 +6090,174 @@ body .eligibility-page .eligibility-final-disclaimer .eligibility-disclaimer-ite
   }
 
   body .eligibility-page .salary-logo {
+    display: none;
+  }
+}
+
+/* Landscape tablet header (for example 1180 x 820).
+ * Reuse the portrait-tablet vehicle card and the compact mobile advisor card
+ * while retaining the landscape desktop shell around them.
+ */
+@media (min-width: 981px) and (max-width: 1320px) and (max-height: 899px) and (orientation: landscape) {
+  #calculatorPage .summary-card-shell.quote-summary-card {
+    grid-template-rows:
+      clamp(320px, 40dvh, 340px)
+      clamp(82px, 12.5dvh, 112px)
+      clamp(90px, 12.8dvh, 118px)
+      minmax(174px, 1fr);
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-advisor-header {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-summary {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 46%);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 0 10px;
+    padding: 18px 16px 14px 24px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.008)),
+      rgba(11, 12, 14, 0.74);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 9px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-brand-lockup {
+    display: none;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-image-frame {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-image {
+    --vehicle-art-scale: 1.12;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-model-tiggo-cross {
+    --vehicle-art-scale: 1.18;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-model-chery-o5 {
+    --vehicle-art-scale: 1.04;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-model-omoda-e5 {
+    --vehicle-art-scale: 1.1;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-name-row {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    width: 100%;
+    padding-top: 0;
+    transform: translateY(-6px);
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-model {
+    font-size: clamp(2.75rem, 7.6cqw, 3.35rem);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-variant {
+    margin-top: 11px;
+    font-size: clamp(1.16rem, 2.8cqw, 1.42rem);
+    letter-spacing: 0.14em;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-spec-strip {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    align-self: end;
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  #calculatorPage .quote-summary-card .vehicle-spec-strip span {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 2px 6px;
+    font-size: clamp(0.54rem, 0.9cqw, 0.64rem);
+  }
+
+  #calculatorPage .quote-summary-card .quote-advisor-panel {
+    grid-template-columns: minmax(0, 1fr) 84px;
+    grid-template-rows: auto;
+    grid-template-areas: "agent qr";
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    min-height: 106px;
+    gap: 16px;
+    padding: 10px 14px;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.008)),
+      rgba(11, 12, 14, 0.74);
+    border-color: rgba(255, 255, 255, 0.18);
+    border-radius: 9px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  #calculatorPage .quote-summary-card .advisor-details {
+    grid-area: agent;
+    align-self: center;
+    gap: 4px;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-role {
+    font-size: 0.64rem;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-name {
+    font-size: 1.55rem;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-contact-row {
+    margin-top: 4px;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-phone-link {
+    gap: 8px;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+  }
+
+  #calculatorPage .quote-summary-card .phone-icon {
+    --outlined-icon-size: 30px;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-qr-section {
+    grid-area: qr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-qr-code {
+    width: 84px;
+    height: 84px;
+  }
+
+  #calculatorPage .quote-summary-card .advisor-qr-copy {
     display: none;
   }
 }

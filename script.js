@@ -48,9 +48,7 @@ const ELIGIBILITY_STATUS_ICONS = {
 };
 
 function usesCompactLayout() {
-  return window.innerWidth <= MOBILE_LAYOUT_BREAKPOINT
-    || window.matchMedia("(min-width: 981px) and (max-width: 1366px) and (min-height: 900px)").matches
-    || window.matchMedia("(min-width: 981px) and (max-width: 1366px) and (orientation: landscape) and (hover: none)").matches;
+  return window.innerWidth <= MOBILE_LAYOUT_BREAKPOINT;
 }
 
 // Add-on availability and prices are loaded from the vehicle-data Worker.
