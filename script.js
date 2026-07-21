@@ -28,6 +28,7 @@ const EIR_EQUIVALENT_FACTOR = 1.86;
 const AVAILABLE_MODEL_YEARS = [2025, 2026];
 const VEHICLE_DATA_URL = "https://chery-shared-data.data-quotation.workers.dev/chery-car-data.json";
 const ADVISOR_SETTINGS_STORAGE_KEY = "chery-advisor-settings";
+const DISPLAY_MODE_STORAGE_KEY = "chery-display-mode";
 const CONSULTANT_QUERY_PARAM = "consultant";
 const APP_PAGE_ROUTES = new Set(["index", "eligibility", "contact"]);
 const DEFAULT_ADVISOR_SETTINGS = {
@@ -618,12 +619,30 @@ function applyAdvisorSettings(settings = getStoredAdvisorSettings()) {
         image = document.createElement("img");
         image.dataset.advisorPhoto = "";
         image.alt = advisorName;
-        image.addEventListener("load", scheduleCardFit);
+        image.addEventListener("load", () => {
+          image.hidden = false;
+          if (placeholder) placeholder.hidden = true;
+          scheduleCardFit();
+        });
+        image.addEventListener("error", () => {
+          image.hidden = true;
+          if (placeholder) {
+            placeholder.hidden = false;
+            placeholder.textContent = advisorName;
+          }
+          scheduleCardFit();
+        });
         slot.appendChild(image);
       }
       image.src = photo;
       image.alt = advisorName;
-      if (placeholder) placeholder.hidden = true;
+      if (image.complete) {
+        image.hidden = image.naturalWidth === 0;
+        if (placeholder) {
+          placeholder.hidden = image.naturalWidth > 0;
+          placeholder.textContent = advisorName;
+        }
+      }
     } else {
       if (image) image.remove();
       if (placeholder) {
@@ -634,7 +653,24 @@ function applyAdvisorSettings(settings = getStoredAdvisorSettings()) {
   });
 
   syncAdvisorSettingInputs(settings);
+  updateContactSocialLayout();
+  refreshContactLiveScript(settings);
   scheduleCardFit();
+}
+
+function updateContactSocialLayout() {
+  document.querySelectorAll(".contact-socials").forEach((container) => {
+    const visibleLinks = [...container.querySelectorAll(".contact-social-link")]
+      .filter((link) => !link.hidden);
+
+    container.querySelectorAll(".contact-social-link").forEach((link) => {
+      link.classList.remove("contact-social-link-centered");
+    });
+
+    if (visibleLinks.length % 2 === 1) {
+      visibleLinks.at(-1)?.classList.add("contact-social-link-centered");
+    }
+  });
 }
 
 function updateAdvisorSettingsFromControls() {
@@ -842,6 +878,50 @@ function setupPageNavigation() {
   });
 }
 
+function getStoredDisplayMode() {
+  try {
+    return window.localStorage.getItem(DISPLAY_MODE_STORAGE_KEY) === "live" ? "live" : "quotation";
+  } catch (error) {
+    return "quotation";
+  }
+}
+
+function storeDisplayMode(mode) {
+  try {
+    window.localStorage.setItem(DISPLAY_MODE_STORAGE_KEY, mode);
+  } catch (error) {
+    // The mode still works for the current page when browser storage is unavailable.
+  }
+}
+
+function setCalculatorMode(mode, { persist = true } = {}) {
+  const nextMode = mode === "live" ? "live" : "quotation";
+
+  document.body.classList.toggle("calculator-live-mode", nextMode === "live");
+  document.body.classList.toggle("live-mode", nextMode === "live");
+  document.body.dataset.displayMode = nextMode;
+  document.querySelectorAll("[data-calculator-mode]").forEach((button) => {
+    const isActive = button.dataset.calculatorMode === nextMode;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  if (persist) storeDisplayMode(nextMode);
+
+  scheduleCardFit();
+}
+
+function setupCalculatorModeSwitch() {
+  const modeButtons = document.querySelectorAll("[data-calculator-mode]");
+  if (!modeButtons.length) return;
+
+  modeButtons.forEach((button) => {
+    button.addEventListener("click", () => setCalculatorMode(button.dataset.calculatorMode));
+  });
+
+  setCalculatorMode(getStoredDisplayMode(), { persist: false });
+}
+
 function groupVehiclesByModel() {
   return vehicles.reduce((groups, car) => {
     if (!groups[car.model]) groups[car.model] = [];
@@ -924,28 +1004,20 @@ function getMinimumSalary(car) {
   return Number.isFinite(minimumSalary) && minimumSalary > 0 ? minimumSalary : null;
 }
 
-function renderEligibilityRows() {
-  const container = document.getElementById("eligibilityRows");
-  if (!container || !vehicles.length) return;
-
+function assessEligibilityModels() {
   const meetsMinimumSalary = eligibilitySalary >= 1500;
   const salaryLimit = eligibilitySalary * (salaryCommitmentRatio / 100);
-  const groups = groupVehiclesByModel();
 
-  container.innerHTML = Object.entries(groups).map(([model, cars]) => {
-    const modelImage = getEligibilityVehicleImageUrl(
-      cars.find((car) => getEligibilityVehicleImageUrl(car))
-    );
-    const modelClass = getVehicleImageClass(model);
+  return Object.entries(groupVehiclesByModel()).map(([model, cars]) => {
     const assessedCars = cars.map((car) => {
-      const isHighEligibility = meetsMinimumSalary
-        && calculateEligibilityPayment(car) <= salaryLimit;
+      const monthlyPayment = calculateEligibilityPayment(car);
+      const isHighEligibility = meetsMinimumSalary && monthlyPayment <= salaryLimit;
       const minimumSalary = getMinimumSalary(car);
       const isPotentiallyEligible = !isHighEligibility
         && minimumSalary !== null
         && eligibilitySalary >= minimumSalary;
 
-      return { car, isHighEligibility, isPotentiallyEligible };
+      return { car, monthlyPayment, isHighEligibility, isPotentiallyEligible };
     });
     const visibleCars = assessedCars.filter(({ isHighEligibility, isPotentiallyEligible }) =>
       isHighEligibility || isPotentiallyEligible
@@ -957,9 +1029,25 @@ function renderEligibilityRows() {
       : hasPotentialEligibility
         ? "potential"
         : "ineligible";
-    const statusText = hasHighEligibility
+
+    return { model, cars, assessedCars, visibleCars, rowState };
+  });
+}
+
+function renderEligibilityRows() {
+  const container = document.getElementById("eligibilityRows");
+  if (!container || !vehicles.length) return;
+
+  const assessments = assessEligibilityModels();
+
+  container.innerHTML = assessments.map(({ model, cars, visibleCars, rowState }) => {
+    const modelImage = getEligibilityVehicleImageUrl(
+      cars.find((car) => getEligibilityVehicleImageUrl(car))
+    );
+    const modelClass = getVehicleImageClass(model);
+    const statusText = rowState === "eligible"
       ? "LAYAK"
-      : hasPotentialEligibility
+      : rowState === "potential"
         ? "POTENSI LAYAK"
         : "BELUM LAYAK";
     const chips = visibleCars.length
@@ -987,6 +1075,7 @@ function renderEligibilityRows() {
 
   container.querySelectorAll(".eligibility-car-img").forEach(setupVehicleImageLoadingState);
 
+  refreshEligibilityLiveScript(assessments);
   scheduleCardFit();
 }
 
@@ -1193,6 +1282,249 @@ function renderModelYearOptions() {
   updateModelYearSelection();
 }
 
+function setLiveScriptText(elementId, value) {
+  const element = document.getElementById(elementId);
+  if (element) element.textContent = value;
+}
+
+function formatLiveScriptMoney(value, step = 100) {
+  const numericValue = Math.max(0, Number(value) || 0);
+  const roundedDownValue = Math.floor(numericValue / step) * step;
+  if (numericValue > 0 && roundedDownValue === 0) return `bawah RM ${step.toLocaleString("en-MY")}`;
+  return `RM ${roundedDownValue.toLocaleString("en-MY", { maximumFractionDigits: 0 })}`;
+}
+
+function formatLiveScriptExactMoney(value) {
+  const numericValue = Math.max(0, Number(value) || 0);
+  return `RM ${numericValue.toLocaleString("en-MY", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  })}`;
+}
+
+function formatLiveScriptOfferList(value) {
+  const offers = String(value || "")
+    .split(/\s+\+\s+|[;\n]+/)
+    .map((offer) => offer.trim())
+    .filter(Boolean);
+
+  if (offers.length <= 1) return offers[0] || "";
+  if (offers.length === 2) return offers.join(" dan ");
+  return `${offers.slice(0, -1).join(", ")} dan ${offers.at(-1)}`;
+}
+
+function formatLiveScriptTextList(values) {
+  const items = [...new Set(values.map((value) => String(value || "").trim()).filter(Boolean))];
+  if (items.length <= 1) return items[0] || "";
+  if (items.length === 2) return items.join(" dan ");
+  return `${items.slice(0, -1).join(", ")} dan ${items.at(-1)}`;
+}
+
+function refreshEligibilityLiveScript(assessments = assessEligibilityModels()) {
+  if (!document.getElementById("eligibilityLiveScriptTitle")) return;
+
+  const salaryLimit = eligibilitySalary * (salaryCommitmentRatio / 100);
+  const eligibleCars = assessments.flatMap(({ assessedCars }) =>
+    assessedCars.filter(({ isHighEligibility }) => isHighEligibility)
+  );
+  const potentialCars = assessments.flatMap(({ assessedCars }) =>
+    assessedCars.filter(({ isPotentiallyEligible }) => isPotentiallyEligible)
+  );
+  const eligibleModels = assessments
+    .filter(({ rowState }) => rowState === "eligible")
+    .map(({ model }) => getLiveScriptModelName(model));
+  const potentialModels = assessments
+    .filter(({ rowState }) => rowState === "potential")
+    .map(({ model }) => getLiveScriptModelName(model));
+  const loanSetup = eligibilityLoanMode === "full-loan" ? "full loan" : "10% downpayment";
+  const loanBadge = eligibilityLoanMode === "full-loan" ? "FULL LOAN" : "10% DOWNPAYMENT";
+  const resultParts = [];
+
+  if (eligibleModels.length) resultParts.push(`${eligibleModels.length} LAYAK`);
+  if (potentialModels.length) resultParts.push(`${potentialModels.length} POTENSI`);
+  if (!resultParts.length) resultParts.push("BELUM ADA PILIHAN");
+
+  setLiveScriptText("eligibilityLiveSalaryBadge", formatLiveScriptMoney(eligibilitySalary, 1));
+  setLiveScriptText("eligibilityLiveLimitBadge", `${formatLiveScriptMoney(salaryLimit, 1)} / BULAN`);
+  setLiveScriptText("eligibilityLiveLoanBadge", loanBadge);
+  setLiveScriptText("eligibilityLiveResultBadge", resultParts.join(" · "));
+
+  setLiveScriptText(
+    "eligibilityLiveOpening",
+    `Okay, saya jawab untuk yang baru comment gaji bersih ${formatLiveScriptMoney(eligibilitySalary, 1)} tadi. Untuk semakan awal ini, saya gunakan setup ${loanSetup} dengan tempoh 9 tahun.`
+  );
+  setLiveScriptText(
+    "eligibilityLiveBudget",
+    `Dengan guideline ansuran 35% daripada gaji, had bayaran bulanan yang kita gunakan ialah sekitar ${formatLiveScriptMoney(salaryLimit, 1)} sebulan.`
+  );
+
+  if (eligibleModels.length) {
+    const lowestEligiblePayment = Math.min(...eligibleCars.map(({ monthlyPayment }) => monthlyPayment));
+    setLiveScriptText(
+      "eligibilityLiveEligible",
+      `Model yang masuk kategori Layak ialah ${formatLiveScriptTextList(eligibleModels)}. Anggaran bayaran paling rendah bermula sekitar ${formatLiveScriptMoney(lowestEligiblePayment, 1)} sebulan.`
+    );
+  } else if (potentialModels.length) {
+    setLiveScriptText(
+      "eligibilityLiveEligible",
+      `Buat masa ini belum ada model dalam zon Layak berdasarkan had 35%, tetapi masih ada pilihan yang boleh kita cuba semak dengan pihak bank.`
+    );
+  } else {
+    setLiveScriptText(
+      "eligibilityLiveEligible",
+      `Untuk angka gaji ini, belum ada model yang melepasi semakan awal. Kita boleh cuba susun semula downpayment atau semak bersama pemohon kedua.`
+    );
+  }
+
+  if (potentialModels.length) {
+    const lowestPotentialPayment = Math.min(...potentialCars.map(({ monthlyPayment }) => monthlyPayment));
+    setLiveScriptText(
+      "eligibilityLivePotential",
+      `Dalam kategori Potensi Layak pula ada ${formatLiveScriptTextList(potentialModels)}, dengan anggaran bayaran bermula sekitar ${formatLiveScriptMoney(lowestPotentialPayment, 1)} sebulan. Yang ini masih perlukan semakan profile dengan lebih detail.`
+    );
+  } else {
+    setLiveScriptText(
+      "eligibilityLivePotential",
+      eligibleModels.length
+        ? "Pilihan yang saya sebut tadi berada dalam had kiraan semasa, jadi kita boleh teruskan kepada personalized quotation."
+        : "Kalau ada extra income atau pemohon bersama, beritahu saya supaya saya boleh buat semakan yang lebih sesuai."
+    );
+  }
+
+  setLiveScriptText(
+    "eligibilityLiveNote",
+    "Ini anggaran awal sahaja. Bank tetap akan tengok komitmen sedia ada, rekod CCRIS atau CTOS, jenis pekerjaan, tempoh bekerja dan dokumen pendapatan sebelum beri final approval."
+  );
+  setLiveScriptText(
+    "eligibilityLiveClosing",
+    "Kalau nak saya semak lebih tepat, tekan dan isi beg oren di bawah. Korang yang lain, boleh komen gaji bersih korang sahaja—iaitu baki selepas tolak semua komitmen bulanan seperti EPF, SOCSO serta komitmen lain. Saya akan semak satu per satu."
+  );
+}
+
+function refreshContactLiveScript(settings = getStoredAdvisorSettings()) {
+  if (!document.getElementById("contactLiveScriptTitle")) return;
+
+  const resolvedSettings = { ...DEFAULT_ADVISOR_SETTINGS, ...settings };
+  const advisorName = formatAdvisorNameTitleCase(resolvedSettings.name || DEFAULT_ADVISOR_SETTINGS.name);
+
+  setLiveScriptText("contactLiveNameBadge", advisorName.toUpperCase());
+  setLiveScriptText(
+    "contactLiveOpening",
+    `Okay, untuk awak yang baru tanya macam mana nak dapatkan quotation Chery, tekan dan isi beg oren di bawah. Saya, ${advisorName}, akan bantu awak dari situ.`
+  );
+  setLiveScriptText(
+    "contactLiveServices",
+    "Saya boleh bantu sediakan personalized car quotation, semak kelayakan loan, terangkan downpayment dan bayaran bulanan, susun test drive, terima urusan trade-in, serta semak promo dan rebate yang sedang available."
+  );
+  setLiveScriptText(
+    "contactLiveRequirements",
+    "Untuk saya kira dengan cepat, berikan model dan varian yang awak minat, jumlah downpayment, tempoh loan, NCD insurance, komitmen bulanan dan maklumat trade-in jika ada."
+  );
+  setLiveScriptText(
+    "contactLiveSocials",
+    "Follow akaun ini untuk update model, promo dan content Chery yang terbaru."
+  );
+  setLiveScriptText(
+    "contactLiveClosing",
+    `Kalau awak dah ready, tekan dan isi beg oren di bawah. Bagi viewers lain boleh komen “NAK QUOTATION”, dan saya akan guide langkah seterusnya.`
+  );
+}
+
+function formatLiveScriptTenure(months) {
+  const normalizedMonths = Math.max(1, Math.round(Number(months) || 0));
+  if (normalizedMonths % 12 === 0) return `${normalizedMonths / 12} tahun`;
+  return `${normalizedMonths} bulan`;
+}
+
+function getLiveScriptModelName(model) {
+  const normalizedModel = String(model || "").trim();
+  if (!normalizedModel) return "model ini";
+  if (/^chery\s+o5\b/i.test(normalizedModel)) {
+    return normalizedModel.replace(/^chery\b/i, "Chery");
+  }
+  return normalizedModel.replace(/^chery\s+/i, "");
+}
+
+function refreshLiveScript({
+  onRoadPrice,
+  insuranceAmount,
+  loanAmount,
+  calculatedDownpayment,
+  selectedMonthlyPayment,
+  monthlyPayments,
+}) {
+  if (!selectedVehicle) return;
+
+  const modelName = getLiveScriptModelName(selectedVehicle.model);
+  const variantName = String(selectedVehicle.variant || "").trim();
+  const modelDescription = `${modelName}${variantName ? ` ${variantName}` : ""} ${selectedModelYear}`;
+  const selectedMonths = isCustomTenure ? customTenureMonths : selectedTenureMonths;
+  const selectedTenureLabel = formatLiveScriptTenure(selectedMonths);
+  const priceWithoutInsurance = selectedVehicle.price + getSelectedAddOnsTotal();
+  const advisorName = formatAdvisorNameTitleCase(
+    String(document.querySelector("[data-advisor-name]")?.textContent || "saya").trim()
+  );
+  const ncdDescription = selectedNcdPercent > 0
+    ? `dengan ${selectedNcdPercent}% NCD`
+    : "tanpa NCD";
+  const interestRateLabel = Number(selectedInterestRate.toFixed(2));
+  const viewerDownpayment = isCustomDownpayment
+    ? (customDownpaymentAmount > 0 ? `downpayment ${formatLiveScriptMoney(customDownpaymentAmount)}` : "zero downpayment")
+    : (selectedDownpaymentPercent > 0 ? `downpayment ${selectedDownpaymentPercent}%` : "zero downpayment");
+
+  const downpaymentBadge = !isCustomDownpayment
+    ? `${selectedDownpaymentPercent}% · ${formatLiveScriptMoney(calculatedDownpayment)}`
+    : formatLiveScriptMoney(customDownpaymentAmount || calculatedDownpayment);
+
+  setLiveScriptText("liveScriptModelBadge", modelDescription);
+  setLiveScriptText("liveScriptDownpaymentBadge", downpaymentBadge);
+  setLiveScriptText("liveScriptTenureBadge", selectedTenureLabel.toUpperCase());
+  setLiveScriptText("liveScriptMonthlyBadge", formatLiveScriptMoney(selectedMonthlyPayment, 1));
+
+  setLiveScriptText(
+    "liveScriptOpening",
+    `Okay, saya jawab untuk yang baru comment tadi. Untuk ${modelDescription} dengan ${viewerDownpayment}, ini kiraan yang paling senang untuk awak faham.`
+  );
+
+  setLiveScriptText(
+    "liveScriptPrice",
+    `Harga tanpa insurance ialah ${formatLiveScriptMoney(priceWithoutInsurance)}. Kemudian tambah insurance sekitar ${formatLiveScriptMoney(insuranceAmount)} ${ncdDescription}, dan tolak rebate ${formatLiveScriptExactMoney(selectedRebateAmount)}. Jadi harga on-the-road termasuk insurance lebih kurang ${formatLiveScriptMoney(onRoadPrice)}.`
+  );
+
+  let loanScript = "";
+  if (isCustomDownpayment && customDownpaymentAmount > 0) {
+    loanScript = `Dengan downpayment ${formatLiveScriptMoney(customDownpaymentAmount)}, jumlah loan sebanyak ${formatLiveScriptMoney(loanAmount)} pada interest rate ${interestRateLabel}%.`;
+  } else if ((!isCustomDownpayment && selectedDownpaymentPercent === 0) || (isCustomDownpayment && customDownpaymentAmount === 0)) {
+    loanScript = `Untuk zero downpayment setup ini, jumlah loan sebanyak ${formatLiveScriptMoney(loanAmount)} pada interest rate ${interestRateLabel}%.`;
+  } else {
+    loanScript = `Downpayment ${selectedDownpaymentPercent}% bersamaan lebih kurang ${formatLiveScriptMoney(calculatedDownpayment)}, dan jumlah loan sebanyak ${formatLiveScriptMoney(loanAmount)} pada interest rate dianggarkan sebanyak ${interestRateLabel}%.`;
+  }
+  loanScript += ` Jadi, dengan tempoh ${selectedTenureLabel}, anggaran bayaran bulanan awak ialah ${formatLiveScriptMoney(selectedMonthlyPayment, 1)}.`;
+  setLiveScriptText("liveScriptLoan", loanScript);
+
+  setLiveScriptText(
+    "liveScriptMonthly",
+    `Kalau ambil loan tempoh ${selectedTenureLabel}, anggaran bayaran bulanan ialah ${formatLiveScriptMoney(selectedMonthlyPayment, 1)} sebulan.`
+  );
+  setLiveScriptText(
+    "liveScriptComparison",
+    `Untuk pilihan tempoh lain, anggaran bayaran bulanan ialah ${formatLiveScriptMoney(monthlyPayments[108], 1)} bagi 9 tahun, ${formatLiveScriptMoney(monthlyPayments[84], 1)} bagi 7 tahun, ${formatLiveScriptMoney(monthlyPayments[60], 1)} bagi 5 tahun, dan ${formatLiveScriptMoney(monthlyPayments[36], 1)} bagi 3 tahun.`
+  );
+
+  const specialRemark = String(selectedVehicle.specialRemark || "").trim();
+  const hasSpecialRemark = specialRemark !== ""
+    && !["-", "n/a", "none", "null"].includes(specialRemark.toLowerCase());
+  const offerScript = hasSpecialRemark
+    ? `Untuk model ni, offer yang included ialah: ${formatLiveScriptOfferList(specialRemark)} Saya akan confirm semula availability sebelum booking.`
+    : "Untuk promo semasa, saya akan confirm ikut stock dan campaign terkini sebelum awak booking.";
+  setLiveScriptText("liveScriptOffer", offerScript);
+
+  setLiveScriptText(
+    "liveScriptClosing",
+    `Jadi kalau awak berminat dengan ${modelDescription}, tekan dan isi beg oren di bawah. Saya akan hubungi awak untuk semak kelayakan dan sediakan personalized quotation dengan lebih detail. Untuk viewers lain yang nak quotation berbeza, komen model kereta Chery, jumlah downpayment, insurance jika ada trade-in, dan tempoh yang awak mahu—saya buat kiraan seterusnya.`
+  );
+}
+
 // ---------- REFRESH QUOTE SUMMARY ----------
 function refreshQuoteSummary() {
   if (!selectedVehicle) return;
@@ -1313,6 +1645,15 @@ function refreshQuoteSummary() {
   const monthlyPaymentDynamic = isCustomTenure
     ? calculateMonthlyPayment(selectedVehicle, totalRebate, selectedNcdPercent, selectedInterestRate, calculatedDownpayment, dynamicTenureMonths)
     : null;
+  const selectedPaymentMonths = isCustomTenure ? customTenureMonths : selectedTenureMonths;
+  const monthlyPayments = {
+    108: monthlyPayment9Years,
+    84: monthlyPayment7Years,
+    60: monthlyPayment5Years,
+    36: monthlyPayment3Years,
+  };
+  const selectedMonthlyPayment = monthlyPayments[selectedPaymentMonths]
+    ?? calculateMonthlyPayment(selectedVehicle, totalRebate, selectedNcdPercent, selectedInterestRate, calculatedDownpayment, selectedPaymentMonths);
 
   const nineYearPaymentElement = document.getElementById("monthlyPayment9Years");
   if (nineYearPaymentElement) nineYearPaymentElement.innerHTML = `RM ${monthlyPayment9Years.toFixed(2)}`;
@@ -1345,6 +1686,15 @@ function refreshQuoteSummary() {
 
   const insuranceAmountDisplayElement = document.getElementById("insuranceAmountDisplay");
   if (insuranceAmountDisplayElement) insuranceAmountDisplayElement.value = `RM ${formatCurrency(insuranceAmount)}`;
+
+  refreshLiveScript({
+    onRoadPrice,
+    insuranceAmount,
+    loanAmount,
+    calculatedDownpayment,
+    selectedMonthlyPayment,
+    monthlyPayments,
+  });
 
   updateSelectedTenure();
   updateModelYearSelection();
@@ -1764,6 +2114,7 @@ function initializeApp() {
   setupControlDrawers();
   syncResponsiveLayout();
   setupPageNavigation();
+  setupCalculatorModeSwitch();
   setupEligibilityCalculator();
   scheduleCardFit();
   window.addEventListener("resize", syncResponsiveLayout);
