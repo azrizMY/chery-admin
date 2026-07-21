@@ -61,6 +61,13 @@
                 <span>03</span>
                 Contact
             </a>
+            <div class="calculator-mode-switch" aria-label="Display mode">
+                <span class="calculator-mode-label">Mode</span>
+                <button type="button" class="calculator-mode-button is-active" data-calculator-mode="quotation"
+                    aria-pressed="true">Quotation</button>
+                <button type="button" class="calculator-mode-button" data-calculator-mode="live"
+                    aria-pressed="false">Live Mode</button>
+            </div>
         </aside>
 
         <main class="page-content-area">
@@ -74,7 +81,8 @@
 
                             <div class="contact-hero">
                                 <div class="contact-copy">
-                                    <h1>Find Your Chery</h1>
+                                    <div class="contact-copy-kicker">YOUR CHERY SALES PARTNER</div>
+                                    <h1><span>Find Your </span><span>Chery</span></h1>
                                     <p>Get the latest Chery promotions, quotation estimates, eligibility checks, loan guidance, and delivery assistance from <span data-advisor-name-title-case>Azri</span>.</p>
                                 </div>
 
@@ -83,9 +91,15 @@
                                         <span data-advisor-photo-placeholder>SC Photo</span>
                                     </div>
                                     <div class="contact-advisor-card">
+                                        <small class="contact-advisor-eyebrow">MEET YOUR CONSULTANT</small>
                                         <div>
                                             <div class="advisor-name" data-advisor-name>AZRI</div>
                                             <div class="advisor-role">SALES CONSULTANT</div>
+                                        </div>
+                                        <div class="contact-advisor-specialties" aria-label="Consultant services">
+                                            <span>QUOTATION</span>
+                                            <span>LOAN</span>
+                                            <span>TRADE-IN</span>
                                         </div>
                                     </div>
                                 </div>
@@ -121,11 +135,28 @@
                                 </a>
                             </div>
 
-                            <div class="contact-services" aria-label="Contact support services">
-                                <span>Personalised Car Quotation</span>
-                                <span>Loan Application Guidance</span>
-                                <span>Test Drive Arrangement</span>
-                                <span>Current Promotions &amp; Rebates</span>
+                            <div class="contact-live-reference-card" aria-label="Direct contact reference">
+                                <span class="contact-live-reference-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 5.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-4.5 3v-3H5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z" />
+                                        <path d="M7.5 9.5h9" />
+                                        <path d="M7.5 13.5h6" />
+                                    </svg>
+                                </span>
+                                <span class="contact-live-reference-copy">
+                                    <small>DIRECT CONTACT</small>
+                                    <strong data-advisor-phone-text>011-5405 5441</strong>
+                                </span>
+                                <span class="contact-live-reference-note">FOR REFERENCE</span>
+                            </div>
+
+                            <div class="contact-live-safe-cta" aria-label="Live enquiry next step">
+                                <small>NAK PERSONALIZED QUOTATION?</small>
+                                <strong>ISI BEG OREN DI BAWAH</strong>
+                                <span class="contact-live-comment-prompt">
+                                    <small>ATAU KOMEN</small>
+                                    <b>“NAK QUOTATION”</b>
+                                </span>
                             </div>
 
                             <div class="contact-social-heading">Follow for latest Chery updates</div>
@@ -172,6 +203,50 @@
                                 </a>
                             </div>
                         </section>
+
+                        <aside class="live-script-panel contact-live-script-panel"
+                            aria-labelledby="contactLiveScriptTitle">
+                            <header class="live-script-header">
+                                <div>
+                                    <span class="live-script-kicker"><span aria-hidden="true"></span> VIEWER FOLLOW-UP</span>
+                                    <h2 id="contactLiveScriptTitle">Turn interest into action</h2>
+                                </div>
+                                <span class="live-script-auto-label">AUTO-UPDATED</span>
+                            </header>
+
+                            <div class="live-script-facts" aria-label="Current consultant highlights">
+                                <span><small>CONSULTANT</small><strong id="contactLiveNameBadge">-</strong></span>
+                                <span><small>NEXT STEP</small><strong>ISI BEG OREN</strong></span>
+                                <span><small>BOLEH BANTU</small><strong>QUOTATION · LOAN · TRADE-IN</strong></span>
+                            </div>
+
+                            <div class="live-script-content">
+                                <section class="live-script-section">
+                                    <h3><span>01</span> TERUS JAWAB</h3>
+                                    <p id="contactLiveOpening">Maklumat consultant sedang disediakan...</p>
+                                </section>
+                                <section class="live-script-section">
+                                    <h3><span>02</span> APA SAYA BOLEH BANTU</h3>
+                                    <p id="contactLiveServices"></p>
+                                </section>
+                                <section class="live-script-section">
+                                    <h3><span>04</span> INFO YANG DIPERLUKAN</h3>
+                                    <p class="live-script-comparison" id="contactLiveRequirements"></p>
+                                </section>
+                                <section class="live-script-section">
+                                    <h3><span>05</span> FOLLOW AKAUN INI</h3>
+                                    <p class="live-script-offer" id="contactLiveSocials"></p>
+                                </section>
+                                <section class="live-script-section live-script-closing-section">
+                                    <h3><span>06</span> NEXT STEP</h3>
+                                    <p id="contactLiveClosing"></p>
+                                </section>
+                            </div>
+
+                            <footer class="live-script-footer">
+                                Gunakan beg oren atau ruangan komen tanpa menyebut nombor telefon atau platform lain.
+                            </footer>
+                        </aside>
                     </div>
 
                     <button type="button" class="drawer-open-button" data-drawer-open="advisorSettingsPanel"

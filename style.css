@@ -261,6 +261,10 @@ body {
   gap: clamp(8px, 1.2vw, 12px);
 }
 
+.contact-copy-kicker {
+  display: none;
+}
+
 .contact-copy h1 {
   color: var(--text-main);
   font-size: clamp(3.2rem, 7vw, 7rem);
@@ -336,10 +340,23 @@ body {
   border-radius: 8px;
 }
 
+.contact-advisor-eyebrow,
+.contact-advisor-specialties {
+  display: none;
+}
+
 .contact-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(12px, 2vw, 16px);
+}
+
+.contact-live-safe-cta {
+  display: none;
+}
+
+.contact-live-reference-card {
+  display: none;
 }
 
 .contact-action-card {
@@ -6372,5 +6389,1014 @@ body .eligibility-page .eligibility-final-disclaimer .eligibility-disclaimer-ite
     max-height: 72px;
     object-position: center;
     transform: none;
+  }
+}
+
+/* Calculator mode control. It is intentionally absent from tablet/mobile UI. */
+.calculator-mode-switch {
+  display: none;
+}
+
+.live-script-panel {
+  display: none;
+}
+
+@media (min-width: 1321px) {
+  .calculator-mode-switch {
+    display: grid;
+    gap: 7px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .calculator-mode-label {
+    color: #81858d;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .calculator-mode-button {
+    min-height: 40px;
+    padding: 8px 10px;
+    color: #b9bcc2;
+    background: rgba(14, 15, 17, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-align: left;
+    text-transform: uppercase;
+    transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  }
+
+  .calculator-mode-button:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.34);
+  }
+
+  .calculator-mode-button.is-active {
+    color: #fff;
+    background: linear-gradient(135deg, rgba(224, 0, 18, 0.34), rgba(68, 3, 12, 0.72));
+    border-color: var(--brand-red-bright);
+    box-shadow: inset 3px 0 0 var(--brand-red-bright);
+  }
+
+  /*
+   * Live Mode is a separate portrait presentation. Every selector is guarded
+   * by calculator-live-mode so the default Quotation Mode remains untouched.
+   */
+  body.calculator-live-mode #calculatorPage .quote-preview-panel {
+    align-items: stretch;
+    /* Anchor the live card directly to the page navigation. */
+    justify-content: flex-start;
+    padding: 0;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 10%, rgba(224, 0, 18, 0.075), transparent 30%),
+      #030405;
+  }
+
+  body.calculator-live-mode #calculatorPage .summary-card-shell.quote-summary-card {
+    width: min(760px, 100%) !important;
+    height: var(--summary-card-shell-panel-height, 100dvh) !important;
+    flex: 0 1 760px;
+    border-inline: 1px solid rgba(255, 255, 255, 0.11);
+    border-left: 0;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+    transform: none !important;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-advisor-header {
+    grid-template-columns: minmax(0, 1fr) clamp(190px, 27cqw, 214px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-summary {
+    grid-template-columns: minmax(252px, 52%) minmax(0, 1fr);
+    padding-inline: clamp(16px, 2.5cqw, 22px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-image-frame {
+    width: 62%;
+    padding: clamp(8px, 1.2dvh, 12px) clamp(4px, 0.8cqw, 8px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-image {
+    --vehicle-art-scale: 1.28;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-model {
+    font-size: clamp(2rem, 5.2cqw, 2.55rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-variant {
+    font-size: clamp(0.92rem, 2.1cqw, 1.1rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-spec-strip {
+    gap: 8px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-spec-strip span {
+    grid-template-columns: 21px minmax(0, 1fr);
+    column-gap: 7px;
+    font-size: clamp(0.68rem, 1.35cqw, 0.78rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .quote-advisor-panel {
+    padding: clamp(11px, 1.5dvh, 15px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-name {
+    font-size: clamp(1.35rem, 3.2cqw, 1.7rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-phone-link {
+    font-size: clamp(0.82rem, 1.8cqw, 0.98rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-qr-section {
+    grid-template-columns: 70px minmax(0, 1fr);
+    gap: 9px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-qr-code {
+    width: 70px;
+    height: 70px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .on-road-price-label,
+  body.calculator-live-mode #calculatorPage .quote-summary-card .financing-summary-item span,
+  body.calculator-live-mode #calculatorPage .quote-summary-card .repayment-header {
+    font-size: clamp(0.64rem, 1.15cqw, 0.72rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .on-road-price-value {
+    font-size: clamp(1.75rem, 4cqw, 2.1rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .financing-summary-item strong {
+    font-size: clamp(1.08rem, 2.45cqw, 1.32rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .price-breakdown .price-breakdown-label {
+    font-size: clamp(0.72rem, 1.25cqw, 0.82rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .price-breakdown-value,
+  body.calculator-live-mode #calculatorPage .quote-summary-card .special-offer-item {
+    font-size: clamp(0.8rem, 1.45cqw, 0.94rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .tenure-value::before {
+    font-size: clamp(0.76rem, 1.35cqw, 0.88rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .monthly-payment-value {
+    font-size: clamp(0.98rem, 1.8cqw, 1.14rem);
+  }
+}
+
+/* The teleprompter occupies only genuine spare room on wide desktop screens. */
+@media (min-width: 1700px) {
+  body.calculator-live-mode #calculatorPage .summary-card-shell.quote-summary-card {
+    width: 760px !important;
+    min-width: 760px !important;
+    max-width: 760px !important;
+    flex: 0 0 760px !important;
+  }
+
+  body.live-mode .live-script-panel {
+    display: flex;
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    padding: clamp(22px, 1.7vw, 32px) clamp(20px, 1.8vw, 34px) clamp(16px, 1.4vw, 26px);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 8%, rgba(224, 0, 18, 0.09), transparent 27%),
+      linear-gradient(180deg, rgba(11, 7, 8, 0.96), rgba(3, 4, 5, 0.98) 38%);
+    container-type: inline-size;
+  }
+
+  .live-script-header {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: clamp(15px, 1.8dvh, 21px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .live-script-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff4b59;
+    font-size: clamp(0.62rem, 2.7cqw, 0.72rem);
+    font-weight: 900;
+    letter-spacing: 0.14em;
+  }
+
+  .live-script-kicker > span {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    background: var(--brand-red-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255, 0, 24, 0.12), 0 0 14px rgba(255, 0, 24, 0.6);
+    animation: live-script-pulse 1.8s ease-in-out infinite;
+  }
+
+  .live-script-header h2 {
+    margin-top: 7px;
+    color: #fff;
+    font-size: clamp(1.05rem, 5cqw, 1.42rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+  }
+
+  .live-script-auto-label {
+    flex: 0 0 auto;
+    padding: 6px 8px;
+    color: #95999f;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: clamp(0.5rem, 2.15cqw, 0.6rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .live-script-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    flex: 0 0 auto;
+    gap: 8px;
+    margin: clamp(14px, 1.8dvh, 20px) 0;
+  }
+
+  .live-script-facts > span {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    padding: 10px 11px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+  }
+
+  .live-script-facts small {
+    color: #7f838a;
+    font-size: clamp(0.5rem, 2.1cqw, 0.58rem);
+    font-weight: 800;
+    letter-spacing: 0.09em;
+  }
+
+  .live-script-facts strong {
+    overflow: hidden;
+    color: #f8f8f8;
+    font-size: clamp(0.72rem, 3.1cqw, 0.84rem);
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .live-script-facts > span:last-child strong {
+    color: #59f0ab;
+  }
+
+  .live-script-content {
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: clamp(8px, 2cqw, 12px);
+    scrollbar-color: rgba(255, 0, 24, 0.55) rgba(255, 255, 255, 0.035);
+    scrollbar-width: thin;
+  }
+
+  .live-script-content::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .live-script-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .live-script-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 24, 0.55);
+    border-radius: 10px;
+  }
+
+  .live-script-section {
+    padding: clamp(13px, 1.65dvh, 18px) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .live-script-section:first-child {
+    padding-top: 2px;
+  }
+
+  .live-script-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+    color: #8d9299;
+    font-size: clamp(0.58rem, 2.45cqw, 0.68rem);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  .live-script-section h3 span {
+    color: var(--brand-red-soft);
+    font-family: Consolas, "Courier New", monospace;
+  }
+
+  .live-script-section p {
+    color: #eef0f2;
+    font-size: clamp(0.82rem, 3.7cqw, 1rem);
+    font-weight: 520;
+    line-height: 1.58;
+  }
+
+  .live-script-section p + p {
+    margin-top: 10px;
+  }
+
+  .live-script-section .live-script-comparison {
+    margin-top: 10px;
+    padding: 9px 10px;
+    color: #bfc3c8;
+    background: rgba(255, 255, 255, 0.032);
+    border-left: 2px solid rgba(255, 0, 24, 0.72);
+    font-size: clamp(0.74rem, 3.2cqw, 0.88rem);
+    line-height: 1.5;
+  }
+
+  .live-script-section .live-script-offer {
+    margin-top: 9px;
+    color: #61e8aa;
+    font-size: clamp(0.75rem, 3.25cqw, 0.9rem);
+  }
+
+  .live-script-closing-section {
+    border-bottom: 0;
+  }
+
+  .live-script-footer {
+    flex: 0 0 auto;
+    margin-top: 12px;
+    padding-top: 12px;
+    color: #686c72;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: clamp(0.53rem, 2.2cqw, 0.62rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+}
+
+@keyframes live-script-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.42;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-script-kicker > span {
+    animation: none;
+  }
+}
+
+@media (min-width: 1321px) {
+  /* Live Mode financing hierarchy: one primary price, then two equal figures. */
+  body.calculator-live-mode #calculatorPage .summary-card-shell.quote-summary-card {
+    grid-template-rows:
+      clamp(270px, 38dvh, 350px)
+      clamp(82px, 10.5dvh, 108px)
+      clamp(72px, 8.8dvh, 90px)
+      clamp(100px, 12.5dvh, 126px)
+      minmax(190px, 1fr);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .on-road-price-summary {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-height: 0;
+    padding: clamp(14px, 1.8dvh, 20px) clamp(18px, 3cqw, 26px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .financing-summary {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(8px, 1dvh, 12px);
+    margin: 0;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .financing-summary-item {
+    min-height: 0;
+    padding: clamp(10px, 1.4dvh, 15px) clamp(14px, 2.2cqw, 20px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .price-breakdown {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .repayment-table {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    grid-template-rows: clamp(40px, 5.8dvh, 56px) repeat(4, minmax(0, 1fr));
+  }
+
+  body.calculator-live-mode #calculatorPage #customTenureRepaymentRow,
+  body.calculator-live-mode #calculatorPage .custom-tenure-control {
+    display: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .okuan-rebate-label,
+  body.calculator-live-mode #calculatorPage .okuan-rebate-control {
+    display: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .on-road-price-value {
+    font-size: clamp(2rem, 4.8cqw, 2.55rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .financing-summary-item strong {
+    font-size: clamp(1.1rem, 2.7cqw, 1.42rem);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card #quoteDownpayment .amount-nowrap {
+    font-size: 1em;
+  }
+
+  /* Reuse the iPad-landscape header structure, with a transparent vehicle area. */
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-advisor-header {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: clamp(8px, 1dvh, 10px);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-summary {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 46%);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 0 10px;
+    padding: clamp(12px, 1.6dvh, 18px) clamp(14px, 2.2cqw, 20px) clamp(10px, 1.4dvh, 14px);
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-image-frame {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: 0;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-image {
+    --vehicle-art-scale: 1.15;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-image-frame .vehicle-model-chery-o5 {
+    --vehicle-art-scale: 0.98;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-name-row {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    width: 100%;
+    padding-top: clamp(18px, 2.5dvh, 24px);
+    transform: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-brand-lockup {
+    top: calc(clamp(24px, 3dvh, 32px) - var(--summary-card-shell-padding));
+    left: calc(28px - var(--summary-card-shell-padding));
+    width: 210px;
+    height: 38px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-spec-strip {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: end;
+    min-height: clamp(50px, 6.2dvh, 58px);
+    margin-top: clamp(7px, 1dvh, 10px);
+    padding: clamp(10px, 1.25dvh, 12px) 4px 4px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .vehicle-spec-strip svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .quote-advisor-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 76px;
+    grid-template-rows: auto;
+    grid-template-areas: "agent qr";
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    min-height: 88px;
+    gap: 14px;
+    padding: 8px 14px;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.008)),
+      rgba(11, 12, 14, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 7px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-details {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-areas:
+      "role contact"
+      "name contact";
+    grid-area: agent;
+    align-self: center;
+    align-items: center;
+    gap: 3px 20px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-role {
+    grid-area: role;
+    font-size: 0.6rem;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-name {
+    grid-area: name;
+    font-size: 1.45rem;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-contact-row {
+    grid-area: contact;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    justify-self: start;
+    min-width: 0;
+    margin: 0;
+    padding: 0 0 0 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-contact-row::before {
+    content: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-phone-link {
+    gap: 10px;
+    font-size: 1.04rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: default;
+    transform: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .phone-icon {
+    --outlined-icon-size: 34px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-qr-section {
+    grid-area: qr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-qr-code {
+    width: 76px;
+    height: 76px;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card .advisor-qr-copy {
+    display: none;
+  }
+
+  body.calculator-live-mode #calculatorPage .quote-summary-card #quoteInterest {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 1.42em;
+    font-weight: 900;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1321px) and (max-height: 820px) {
+  body.calculator-live-mode #calculatorPage .summary-card-shell.quote-summary-card {
+    grid-template-rows:
+      clamp(270px, 38dvh, 350px)
+      clamp(82px, 10.5dvh, 108px)
+      clamp(72px, 8.8dvh, 90px)
+      clamp(100px, 12.5dvh, 126px)
+      minmax(130px, 1fr);
+  }
+}
+
+/* Shared Live Mode geometry for Eligibility and Contact. */
+@media (min-width: 1321px) {
+  body.live-mode .eligibility-page .eligibility-preview-panel,
+  body.live-mode .contact-page {
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 10%, rgba(224, 0, 18, 0.075), transparent 30%),
+      #030405;
+  }
+
+  body.live-mode .eligibility-page .summary-card-shell.eligibility-summary-card,
+  body.live-mode .contact-page .contact-card {
+    width: min(760px, 100%) !important;
+    max-width: 760px !important;
+    height: 100dvh !important;
+    min-height: 0;
+    flex: 0 1 760px;
+    border-right: 1px solid rgba(255, 255, 255, 0.11);
+    border-left: 0;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.5);
+    transform: none !important;
+  }
+
+  body.live-mode .contact-page .contact-card {
+    grid-template-rows: auto minmax(420px, 1fr) auto auto;
+    gap: clamp(11px, 1.55dvh, 17px);
+    padding: clamp(24px, 3dvh, 32px) 28px clamp(18px, 2.4dvh, 26px);
+  }
+
+  body.live-mode .contact-page .contact-brand {
+    padding-bottom: 12px;
+  }
+
+  body.live-mode .contact-page .contact-brand img {
+    width: 210px;
+    height: 38px;
+  }
+
+  body.live-mode .contact-page .contact-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-content: center;
+    gap: 22px;
+  }
+
+  body.live-mode .contact-page .contact-copy {
+    align-self: center;
+    align-content: center;
+    gap: 0;
+  }
+
+  body.live-mode .contact-page .contact-copy-kicker {
+    display: block;
+    margin-bottom: 11px;
+    color: var(--brand-red-soft);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+  }
+
+  body.live-mode .contact-page .contact-copy h1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.22em;
+    align-items: baseline;
+    font-size: clamp(3.05rem, 4.8dvh, 3.85rem);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+  }
+
+  body.live-mode .contact-page .contact-copy h1 span {
+    display: inline;
+  }
+
+  body.live-mode .contact-page .contact-copy h1 span:last-child {
+    color: var(--brand-red-soft);
+  }
+
+  body.live-mode .contact-page .contact-copy p {
+    max-width: 60ch;
+    margin-top: 17px;
+    color: #d0d3d7;
+    font-size: clamp(0.96rem, 1.4dvh, 1.06rem);
+    font-weight: 530;
+    line-height: 1.55;
+  }
+
+  body.live-mode .contact-page .contact-profile-panel {
+    grid-template-columns: 250px minmax(0, 1fr);
+    grid-template-rows: 228px;
+    align-self: stretch;
+    justify-self: stretch;
+    width: 100%;
+    min-height: 0;
+    gap: 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 9px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  body.live-mode .contact-page .contact-photo-slot {
+    width: 100%;
+    height: 228px;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  body.live-mode .contact-page .contact-photo-slot::before {
+    content: none;
+  }
+
+  body.live-mode .contact-page .contact-photo-slot img {
+    object-position: center 32%;
+  }
+
+  body.live-mode .contact-page .contact-advisor-card {
+    grid-template-rows: auto auto auto;
+    align-content: center;
+    gap: 12px;
+    height: 228px;
+    padding: 24px 28px;
+    background:
+      radial-gradient(circle at 92% 20%, rgba(224, 0, 18, 0.13), transparent 34%),
+      rgba(15, 16, 18, 0.96);
+    border: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0;
+  }
+
+  body.live-mode .contact-page .contact-advisor-eyebrow {
+    display: block;
+    color: var(--brand-red-soft);
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+  }
+
+  body.live-mode .contact-page .contact-advisor-card .advisor-name {
+    font-size: 2.2rem;
+    letter-spacing: 0.015em;
+  }
+
+  body.live-mode .contact-page .contact-advisor-card .advisor-role {
+    margin-top: 5px;
+    color: #c4c7cb;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+  }
+
+  body.live-mode .contact-page .contact-advisor-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    padding-top: 10px;
+    color: #9ca1a8;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.6rem;
+    font-weight: 850;
+    letter-spacing: 0.07em;
+  }
+
+  body.live-mode .contact-page .contact-advisor-specialties span + span::before {
+    margin-inline: 10px;
+    color: var(--brand-red-soft);
+    content: "•";
+  }
+
+  body.live-mode .contact-page .contact-actions {
+    display: none;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-card {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 13px;
+    min-height: 70px;
+    padding: 12px 16px;
+    background:
+      radial-gradient(circle at 8% 50%, rgba(102, 96, 255, 0.28), transparent 34%),
+      linear-gradient(135deg, rgba(38, 43, 78, 0.94), rgba(16, 18, 28, 0.96));
+    border: 1px solid rgba(151, 158, 255, 0.34);
+    border-radius: 7px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    cursor: default;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-icon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    color: #d9dcff;
+    background: rgba(134, 127, 255, 0.2);
+    border: 1px solid rgba(172, 177, 255, 0.3);
+    border-radius: 50%;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-icon svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-copy {
+    display: grid;
+    gap: 4px;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-copy small {
+    color: #aeb4ce;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.11em;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-copy strong {
+    color: #fff;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 1.12rem;
+    font-weight: 800;
+    letter-spacing: 0.035em;
+  }
+
+  body.live-mode .contact-page .contact-live-reference-note {
+    padding: 5px 7px;
+    color: #c8caff;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 4px;
+    font-size: 0.54rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  body.live-mode .contact-page .contact-live-safe-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "eyebrow note"
+      "title note";
+    align-items: center;
+    gap: 5px 24px;
+    min-height: 76px;
+    padding: 13px 18px;
+    background:
+      radial-gradient(circle at 12% 50%, rgba(255, 0, 24, 0.22), transparent 38%),
+      rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.17);
+    border-radius: 7px;
+  }
+
+  body.live-mode .contact-page .contact-live-safe-cta > small {
+    grid-area: eyebrow;
+    color: #aeb2b8;
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  body.live-mode .contact-page .contact-live-safe-cta > strong {
+    grid-area: title;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  body.live-mode .contact-page .contact-live-comment-prompt {
+    grid-area: note;
+    display: grid;
+    gap: 3px;
+    min-width: 148px;
+    padding: 8px 12px;
+    background: rgba(255, 0, 24, 0.09);
+    border: 1px solid rgba(255, 61, 74, 0.28);
+    border-radius: 6px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  body.live-mode .contact-page .contact-live-comment-prompt small {
+    color: #9ca0a7;
+    font-size: 0.5rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  body.live-mode .contact-page .contact-live-comment-prompt b {
+    color: #ff6673;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.025em;
+  }
+
+  body.live-mode .contact-page .contact-services {
+    gap: 8px 18px;
+    padding-block: 3px;
+  }
+
+  body.live-mode .contact-page .contact-services span {
+    font-size: 0.76rem;
+  }
+
+  body.live-mode .contact-page .contact-social-heading {
+    display: none;
+  }
+
+  body.live-mode .contact-page .contact-socials {
+    display: none;
+  }
+
+  body.live-mode .contact-live-script-panel .live-script-facts > span:last-child {
+    grid-column: 1 / -1;
+  }
+
+  body.live-mode #advisorSettingsPanel .control-group:has([data-advisor-setting="phone"]),
+  body.live-mode #advisorSettingsPanel .control-group:has([data-advisor-setting="instagram"]),
+  body.live-mode #advisorSettingsPanel .control-group:has([data-advisor-setting="facebook"]),
+  body.live-mode #advisorSettingsPanel .control-group:has([data-advisor-setting="threads"]) {
+    display: none;
+  }
+
+  body.live-mode .contact-page .contact-socials .contact-social-link {
+    min-height: 46px;
+    padding-block: 4px;
+    font-size: 0.76rem;
+  }
+
+  body.live-mode .contact-page .contact-socials .contact-social-link-centered {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 4px);
+  }
+
+  body.live-mode .contact-page .contact-socials .contact-social-link svg {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+
+  body.live-mode .eligibility-page .eligibility-table-header,
+  body.live-mode .eligibility-page .eligibility-row {
+    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.3fr);
+  }
+
+  body.live-mode .eligibility-page .eligibility-table-header > span:nth-child(2),
+  body.live-mode .eligibility-page .eligibility-status {
+    display: none;
+  }
+}
+
+@media (min-width: 1700px) {
+  body.live-mode .eligibility-page .summary-card-shell.eligibility-summary-card,
+  body.live-mode .contact-page .contact-card {
+    width: 760px !important;
+    min-width: 760px !important;
+    max-width: 760px !important;
+    flex: 0 0 760px !important;
   }
 }

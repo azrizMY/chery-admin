@@ -61,6 +61,13 @@
                 <span>03</span>
                 Contact
             </a>
+            <div class="calculator-mode-switch" aria-label="Display mode">
+                <span class="calculator-mode-label">Mode</span>
+                <button type="button" class="calculator-mode-button is-active" data-calculator-mode="quotation"
+                    aria-pressed="true">Quotation</button>
+                <button type="button" class="calculator-mode-button" data-calculator-mode="live"
+                    aria-pressed="false">Live Mode</button>
+            </div>
         </aside>
 
         <main class="page-content-area">
@@ -137,6 +144,49 @@
                         </div>
 
                     </div>
+
+                    <aside class="live-script-panel eligibility-live-script-panel"
+                        aria-labelledby="eligibilityLiveScriptTitle">
+                        <header class="live-script-header">
+                            <div>
+                                <span class="live-script-kicker"><span aria-hidden="true"></span> COMMENT REPLY</span>
+                                <h2 id="eligibilityLiveScriptTitle">Reply about eligibility</h2>
+                            </div>
+                            <span class="live-script-auto-label">AUTO-UPDATED</span>
+                        </header>
+
+                        <div class="live-script-facts" aria-label="Current eligibility highlights">
+                            <span><small>GAJI BERSIH</small><strong id="eligibilityLiveSalaryBadge">-</strong></span>
+                            <span><small>HAD ANSURAN</small><strong id="eligibilityLiveLimitBadge">-</strong></span>
+                            <span><small>LOAN SETUP</small><strong id="eligibilityLiveLoanBadge">-</strong></span>
+                            <span><small>HASIL SEMAKAN</small><strong id="eligibilityLiveResultBadge">-</strong></span>
+                        </div>
+
+                        <div class="live-script-content">
+                            <section class="live-script-section">
+                                <h3><span>01</span> TERUS JAWAB</h3>
+                                <p id="eligibilityLiveOpening">Semakan kelayakan sedang disediakan...</p>
+                                <p id="eligibilityLiveBudget">Had ansuran akan dipaparkan di sini.</p>
+                            </section>
+                            <section class="live-script-section">
+                                <h3><span>02</span> PILIHAN YANG MASUK</h3>
+                                <p id="eligibilityLiveEligible">Pilihan model akan dipaparkan di sini.</p>
+                                <p id="eligibilityLivePotential"></p>
+                            </section>
+                            <section class="live-script-section">
+                                <h3><span>04</span> IMPORTANT NOTE</h3>
+                                <p class="live-script-comparison" id="eligibilityLiveNote"></p>
+                            </section>
+                            <section class="live-script-section live-script-closing-section">
+                                <h3><span>05</span> NEXT STEP</h3>
+                                <p id="eligibilityLiveClosing"></p>
+                            </section>
+                        </div>
+
+                        <footer class="live-script-footer">
+                            Anggaran menggunakan tempoh 9 tahun dan had ansuran 35%; kelulusan akhir tertakluk kepada pihak bank.
+                        </footer>
+                    </aside>
                 </div>
 
                 <button type="button" class="drawer-open-button" data-drawer-open="eligibilitySettingsPanel"

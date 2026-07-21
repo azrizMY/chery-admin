@@ -62,6 +62,13 @@
                 <span>03</span>
                 Contact
             </a>
+            <div class="calculator-mode-switch" aria-label="Display mode">
+                <span class="calculator-mode-label">Mode</span>
+                <button type="button" class="calculator-mode-button is-active" data-calculator-mode="quotation"
+                    aria-pressed="true">Quotation</button>
+                <button type="button" class="calculator-mode-button" data-calculator-mode="live"
+                    aria-pressed="false">Live Mode</button>
+            </div>
         </aside>
 
         <main class="page-content-area">
@@ -138,9 +145,7 @@
                                         <div class="advisor-name" data-advisor-name>AZRI</div>
                                         <div class="advisor-role">SALES CONSULTANT</div>
                                         <div class="advisor-contact-row">
-                                            <a class="advisor-phone-link"
-                                                href="https://api.whatsapp.com/send?phone=601154055441&text=Saya+berminat+dengan+kereta+Chery%21"
-                                                aria-label="WhatsApp Azri at 011-5405 5441" data-advisor-whatsapp-link>
+                                            <div class="advisor-phone-link" aria-label="WhatsApp Azri at 011-5405 5441">
                                                 <span class="outlined-icon phone-icon whatsapp-icon" aria-hidden="true">
                                                     <svg viewBox="0 0 32 32">
                                                         <path
@@ -148,7 +153,7 @@
                                                     </svg>
                                                 </span>
                                                 <span data-advisor-phone-text>011-5405 5441</span>
-                                            </a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -292,6 +297,52 @@
                                 </div>
                             </div>
                         </div>
+
+                        <aside class="live-script-panel" aria-labelledby="liveScriptTitle">
+                            <header class="live-script-header">
+                                <div>
+                                    <span class="live-script-kicker"><span aria-hidden="true"></span> COMMENT REPLY</span>
+                                    <h2 id="liveScriptTitle">Reply to your viewer</h2>
+                                </div>
+                                <span class="live-script-auto-label">AUTO-UPDATED</span>
+                            </header>
+
+                            <div class="live-script-facts" aria-label="Current quotation highlights">
+                                <span><small>MODEL</small><strong id="liveScriptModelBadge">-</strong></span>
+                                <span><small>DOWNPAYMENT</small><strong id="liveScriptDownpaymentBadge">-</strong></span>
+                                <span><small>TEMPOH PILIHAN</small><strong id="liveScriptTenureBadge">-</strong></span>
+                                <span><small>BAYARAN BULANAN</small><strong id="liveScriptMonthlyBadge">-</strong></span>
+                            </div>
+
+                            <div class="live-script-content" id="liveScriptContent">
+                                <section class="live-script-section">
+                                    <h3><span>01</span> TERUS JAWAB</h3>
+                                    <p id="liveScriptOpening">Quotation sedang disediakan...</p>
+                                    <p id="liveScriptMonthly">Anggaran bayaran bulanan akan dipaparkan di sini.</p>
+                                </section>
+                                <section class="live-script-section">
+                                    <h3><span>02</span> KIRAAN RINGKAS</h3>
+                                    <p id="liveScriptPrice">Maklumat harga akan dipaparkan di sini.</p>
+                                    <p id="liveScriptLoan">Maklumat pembiayaan akan dipaparkan di sini.</p>
+                                </section>
+                                <section class="live-script-section">
+                                    <h3><span>04</span> PILIH IKUT BAJET</h3>
+                                    <p class="live-script-comparison" id="liveScriptComparison"></p>
+                                </section>
+                                <section class="live-script-section">
+                                    <h3><span>05</span> PROMO & IMPORTANT NOTE</h3>
+                                    <p class="live-script-offer" id="liveScriptOffer"></p>
+                                </section>
+                                <section class="live-script-section live-script-closing-section">
+                                    <h3><span>06</span> NEXT STEP</h3>
+                                    <p id="liveScriptClosing">Ajak viewers isi beg oren atau minta quotation lain.</p>
+                                </section>
+                            </div>
+
+                            <footer class="live-script-footer">
+                                Harga dan insurance dibundarkan ke bawah ke RM100; rebate kekal tepat dan bayaran bulanan ditunjukkan tanpa sen.
+                            </footer>
+                        </aside>
                     </div>
 
                     <button type="button" class="drawer-open-button" data-drawer-open="calculatorSettingsPanel"
@@ -421,7 +472,7 @@
                                     <button type="button" data-months="36" class="option-button">3 Yrs</button>
                                 </div>
                             </div>
-                            <div class="control-group">
+                            <div class="control-group custom-tenure-control">
                                 <label>Custom Tenure (Months)</label>
                                 <input type="number" id="customTenureMonthsInput" step="1" min="1" value="108">
                             </div>
