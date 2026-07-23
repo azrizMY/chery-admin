@@ -41,6 +41,7 @@ const DEFAULT_ADVISOR_SETTINGS = {
   tiktok: "@azri.cherykb",
   facebook: "https://www.facebook.com/azri.cherykb",
   threads: "@azri.cherykb",
+  x: "",
 };
 const ELIGIBILITY_STATUS_ICONS = {
   eligible: "&#10003;",
@@ -465,7 +466,7 @@ function buildTelUrl(phone) {
 function stripSocialHandle(value) {
   return String(value || "")
     .trim()
-    .replace(/^https?:\/\/(www\.)?(instagram\.com|tiktok\.com|facebook\.com|threads\.net)\//i, "")
+    .replace(/^https?:\/\/(www\.)?(instagram\.com|tiktok\.com|facebook\.com|threads\.net|x\.com|twitter\.com)\//i, "")
     .replace(/^@/, "")
     .replace(/\/+$/, "");
 }
@@ -481,6 +482,7 @@ function buildSocialUrl(platform, value) {
   if (platform === "tiktok") return `https://www.tiktok.com/@${handle}`;
   if (platform === "facebook") return `https://www.facebook.com/${handle}`;
   if (platform === "threads") return `https://www.threads.net/@${handle}`;
+  if (platform === "x") return `https://x.com/${handle}`;
   return "#";
 }
 
@@ -517,6 +519,7 @@ function getConsultantSettings(consultant) {
     tiktok: consultant.socials?.tiktok || "",
     facebook: consultant.socials?.facebook || "",
     threads: consultant.socials?.threads || "",
+    x: consultant.socials?.x || consultant.socials?.twitter || "",
   };
 }
 
@@ -587,7 +590,7 @@ function applyAdvisorSettings(settings = getStoredAdvisorSettings()) {
     image.alt = `${advisorName} WhatsApp QR code`;
   });
 
-  ["instagram", "tiktok", "facebook", "threads"].forEach((platform) => {
+  ["instagram", "tiktok", "facebook", "threads", "x"].forEach((platform) => {
     const value = String(settings[platform] ?? DEFAULT_ADVISOR_SETTINGS[platform] ?? "").trim();
     const href = buildSocialUrl(platform, value);
     const label = getSocialLabel(platform, value, advisorName);
@@ -684,6 +687,7 @@ function updateAdvisorSettingsFromControls() {
     tiktok: getAdvisorSettingValue("tiktok"),
     facebook: getAdvisorSettingValue("facebook"),
     threads: getAdvisorSettingValue("threads"),
+    x: getAdvisorSettingValue("x"),
   };
 
   saveAdvisorSettings(nextSettings);
