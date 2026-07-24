@@ -8,19 +8,19 @@
     <meta name="description" content="Chery salary eligibility guide for estimating suitable models by net monthly salary.">
     <meta property="og:title" content="Chery Salary Eligibility">
     <meta property="og:description" content="Check estimated Chery model eligibility using salary, loan mode, and repayment assumptions.">
-    <meta property="og:image" content="/images/logo.png">
+    <meta property="og:image" content="/images/logo-sc.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Chery Salary Eligibility">
     <meta name="twitter:description" content="Check estimated Chery model eligibility using salary, loan mode, and repayment assumptions.">
-    <meta name="twitter:image" content="/images/logo.png">
+    <meta name="twitter:image" content="/images/logo-sc.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#d51f3c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Chery Calc">
-    <link rel="icon" type="image/png" href="/images/logo.png">
-    <link rel="apple-touch-icon" href="/images/logo.png">
+    <link rel="icon" type="image/png" href="/images/logo-sc.png">
+    <link rel="apple-touch-icon" href="/images/logo-sc.png">
     <link rel="stylesheet" href="style.css?v=ui-v19">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
@@ -116,7 +116,7 @@
                         <div class="eligibility-disclaimer" aria-label="Eligibility status guide">
                             <span class="eligibility-disclaimer-item high">
                                 <b>Layak</b>
-                                Ansuran dalam had 35% daripada gaji.
+                                Bayaran bulanan dalam had 35% daripada gaji.
                             </span>
                             <span class="eligibility-disclaimer-item potential">
                                 <b>Potensi Layak</b>
@@ -149,27 +149,33 @@
                         aria-labelledby="eligibilityLiveScriptTitle">
                         <header class="live-script-header">
                             <div>
-                                <span class="live-script-kicker"><span aria-hidden="true"></span> COMMENT REPLY</span>
-                                <h2 id="eligibilityLiveScriptTitle">Reply about eligibility</h2>
+                                <span class="live-script-kicker"><span aria-hidden="true"></span> LIVE ELIGIBILITY</span>
+                                <h2 id="eligibilityLiveScriptTitle">Skrip Live Eligibility</h2>
                             </div>
                             <span class="live-script-auto-label">AUTO-UPDATED</span>
                         </header>
 
                         <div class="live-script-facts" aria-label="Current eligibility highlights">
                             <span><small>GAJI BERSIH</small><strong id="eligibilityLiveSalaryBadge">-</strong></span>
-                            <span><small>HAD ANSURAN</small><strong id="eligibilityLiveLimitBadge">-</strong></span>
+                            <span><small>HAD BULANAN</small><strong id="eligibilityLiveLimitBadge">-</strong></span>
                             <span><small>LOAN SETUP</small><strong id="eligibilityLiveLoanBadge">-</strong></span>
                             <span><small>HASIL SEMAKAN</small><strong id="eligibilityLiveResultBadge">-</strong></span>
                         </div>
 
                         <div class="live-script-content">
                             <section class="live-script-section">
-                                <h3><span>01</span> TERUS JAWAB</h3>
-                                <p id="eligibilityLiveOpening">Semakan kelayakan sedang disediakan...</p>
-                                <p id="eligibilityLiveBudget">Had ansuran akan dipaparkan di sini.</p>
+                                <h3><span>01</span> SKRIP PEMBUKAAN</h3>
+                                <p>Sekarang kita tengok model Chery mana yang lebih dekat dengan kemampuan bulanan awak. Semua semakan di sini menggunakan loan 9 tahun.</p>
+                                <p>Tulis gaji bersih dan pilih setup downpayment: 10% DP, full loan atau jumlah sendiri. Contoh: <strong>Gaji RM3,000, deposit 10%.</strong></p>
+                                <p>Calculator ini beri panduan awal supaya kita tahu pilihan mana yang patut disemak dengan lebih terperinci.</p>
                             </section>
                             <section class="live-script-section">
-                                <h3><span>02</span> PILIHAN YANG MASUK</h3>
+                                <h3><span>02</span> SEMAK KOMEN GAJI</h3>
+                                <p id="eligibilityLiveOpening">Semakan kelayakan sedang disediakan...</p>
+                            </section>
+                            <section class="live-script-section">
+                                <h3><span>03</span> SKRIP MEMBACA SEMAKAN</h3>
+                                <p id="eligibilityLiveBudget">Had bayaran bulanan akan dipaparkan di sini.</p>
                                 <p id="eligibilityLiveEligible">Pilihan model akan dipaparkan di sini.</p>
                                 <p id="eligibilityLivePotential"></p>
                             </section>
@@ -178,13 +184,14 @@
                                 <p class="live-script-comparison" id="eligibilityLiveNote"></p>
                             </section>
                             <section class="live-script-section live-script-closing-section">
-                                <h3><span>05</span> NEXT STEP</h3>
+                                <h3><span>05</span> NEXT STEP &amp; CTA</h3>
                                 <p id="eligibilityLiveClosing"></p>
+                                <p>Kalau nak saya semak giliran awak pula, tulis gaji bersih bersama pilihan downpayment. Follow untuk tengok semakan bajet yang seterusnya.</p>
                             </section>
                         </div>
 
                         <footer class="live-script-footer">
-                            Anggaran menggunakan tempoh 9 tahun dan had ansuran 35%; kelulusan akhir tertakluk kepada pihak bank.
+                            Semakan awal menggunakan loan 9 tahun dan had bayaran bulanan 35%. Keputusan akhir tertakluk kepada pihak bank.
                         </footer>
                     </aside>
                 </div>
@@ -223,17 +230,26 @@
                             <input id="salarySettingsInput" type="number" min="0" step="100" value="3000">
                         </div>
                         <div class="control-group">
-                            <label>Loan Mode</label>
+                            <label>Downpayment Setup</label>
                             <div class="salary-loan-options">
                                 <label>
                                     <input type="radio" name="salaryLoanMode" value="ten-percent" checked>
                                     10% DP
                                 </label>
-                                <label>
+                                <label class="salary-loan-option-full">
                                     <input type="radio" name="salaryLoanMode" value="full-loan">
                                     Full Loan
                                 </label>
+                                <label>
+                                    <input type="radio" name="salaryLoanMode" value="custom">
+                                    Custom DP
+                                </label>
                             </div>
+                        </div>
+                        <div class="control-group" id="eligibilityCustomDownpaymentGroup" hidden>
+                            <label for="eligibilityCustomDownpaymentInput">Custom Downpayment (RM)</label>
+                            <input id="eligibilityCustomDownpaymentInput" type="number" min="0" step="500"
+                                value="5000" inputmode="numeric">
                         </div>
                         <div class="eligibility-calculation-note">
                             Variants are estimated using a 9-year monthly payment, the selected loan mode, and a fixed

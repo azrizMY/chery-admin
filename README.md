@@ -72,7 +72,7 @@ The pages expect brand assets under `/images`, including:
 
 ```text
 images/
-|-- logo.png
+|-- logo-sc.png
 |-- chery-horizontal-logo.png
 |-- chery-vertical-logo.png
 `-- consultants/
